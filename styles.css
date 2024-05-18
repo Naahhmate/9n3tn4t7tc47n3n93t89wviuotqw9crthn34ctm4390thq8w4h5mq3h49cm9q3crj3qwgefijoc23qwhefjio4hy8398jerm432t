@@ -339,6 +339,7 @@ input[type="range"] {
     display: none;
     animation: popup-fade-in 0.3s forwards;
   }
+
 }
 
 .popup.show {
