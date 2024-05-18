@@ -107,19 +107,14 @@ closeBtn.addEventListener('click', () => {
     section.classList.remove("active")
     overlay.style.display='none';
     overlay.style.opacity='0';
-    if (isMobile) {
-        mainContainer.style.opacity='1';
-    }
+
     
 });
 section.addEventListener('click', () => {
     section.classList.remove("active")
     overlay.style.display='none';
     overlay.style.opacity='0';
-    if (isMobile) {
-        mainContainer.style.opacity='1';
-    }
-    
+
 });
 
 
