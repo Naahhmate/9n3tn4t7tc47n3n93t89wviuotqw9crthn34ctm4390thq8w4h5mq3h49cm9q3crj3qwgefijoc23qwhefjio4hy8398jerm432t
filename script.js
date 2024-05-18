@@ -205,11 +205,10 @@ function throttle(fn, delay) {
     title.innerText = message
     content.innerText = cont
     overlay.style.display='flex';
-    alert(navigator.userAgentData.mobile)
     if (navigator.userAgentData.mobile) {
-        overlay.style.opacity='0';
+        mainContainer.style.opacity='0';
     } else {
-        overlay.style.opacity='1';
+        mainContainer.style.opacity='1';
     }
     if (type == "Normal") {
         icon.className = "fa-solid fa-circle-info"
