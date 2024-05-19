@@ -208,6 +208,8 @@ function throttle(fn, delay) {
     if (isMobile) {
         //mainContainer.style.opacity='1';
         alert("Working")
+    } else{
+        alert("Working ig")
     }
     if (type == "Normal") {
         icon.className = "fa-solid fa-circle-info"
