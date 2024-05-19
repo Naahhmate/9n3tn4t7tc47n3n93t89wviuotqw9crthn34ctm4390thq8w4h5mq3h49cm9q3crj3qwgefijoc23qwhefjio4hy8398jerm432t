@@ -521,22 +521,6 @@ function getCookie(name) {
     return null;
 }
 
-
-// Function to get the user's IP address
-async function getUserIP() {
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    return data.ip;
-}
-
-// Function to get the number of exchanges for the given IP address
-async function getIPExchanges(ip) {
-    const response = await fetch(`https://ipapi.co/${ip}/json/`);
-    const data = await response.json();
-    return data.exchanges || 0;
-}
-
-// Modify the O0WX5xObgGH4DkLibt68CAXcqBkjVWspu function to include the canExchange check
 lastSubmit.addEventListener('click', () => {
     async function getUserIP() {
       const response = await fetch('https://api.ipify.org?format=json');
