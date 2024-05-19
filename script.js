@@ -227,7 +227,7 @@ function throttle(fn, delay) {
       }
   }
 
-  createModalMessage('Normal','user device','on phone: '+navigator.userAgentData.mobile)
+  
 
   function showPopup() {
     const selectedCrypto = cryptoSelect.value;
