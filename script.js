@@ -246,7 +246,7 @@ function throttle(fn, delay) {
         overlay.style.display = 'flex';
         overlay.style.opacity = '1';
         popup.classList.add('show');
-        if ()
+        
         return 'Success';
     } else {
         popup.classList.remove('show');
