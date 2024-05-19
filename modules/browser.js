@@ -612,3 +612,14 @@ if (!getCookie('firstTime')) {
     mYFecl5Xlodg2LUyPeEOwSotXkg1J7ib('Normal',  'Hey!', `Please note that our website is still in development!`);
     setCookie('firstTime',true,1)
 }
+
+document.getElementById("last-submit").addEventListener("click",function(evt) {
+    let response = grecaptcha.getResponse();
+    if(response.length == 0) {
+      createToast('warning','please finish the captcha first!')
+      evt.preventDefault();
+      return false;
+    } else {
+        createToast('success','Captcha finished!')
+    }
+  });
