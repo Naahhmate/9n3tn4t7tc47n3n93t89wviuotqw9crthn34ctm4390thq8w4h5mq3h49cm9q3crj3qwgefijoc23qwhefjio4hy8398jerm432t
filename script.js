@@ -205,7 +205,10 @@ function throttle(fn, delay) {
     title.innerText = message
     content.innerText = cont
     overlay.style.display='flex';
-
+    if (isMobile) {
+        //mainContainer.style.opacity='1';
+        alert("Working")
+    }
     if (type == "Normal") {
         icon.className = "fa-solid fa-circle-info"
         const icons = document.querySelectorAll('.modal-box i');
