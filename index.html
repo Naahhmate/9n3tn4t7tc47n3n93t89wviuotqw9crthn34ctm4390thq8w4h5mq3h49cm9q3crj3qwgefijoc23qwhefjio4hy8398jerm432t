@@ -191,18 +191,4 @@
   </script>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-  document.getElementById("last-submit").addEventListener("click",function(evt) {
-    let response = grecaptcha.getResponse();
-    if(response.length == 0) {
-      alert("please verify you are human!");
-      evt.preventDefault();
-      return false;
-    } else {
-      console.log("you are human!");
-      document.getElementById("last-submit").style.display = "block";
-      document.getElementById("last-submit").style.display = "none";
-    }
-  });
-</script>
 </html>
