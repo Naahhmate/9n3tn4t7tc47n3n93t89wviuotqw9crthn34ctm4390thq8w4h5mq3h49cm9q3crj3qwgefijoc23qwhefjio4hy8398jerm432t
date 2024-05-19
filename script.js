@@ -107,6 +107,9 @@ closeBtn.addEventListener('click', () => {
     section.classList.remove("active")
     overlay.style.display='none';
     overlay.style.opacity='0';
+    if (isMobile) {
+        mainContainer.style.opacity='1';
+    }
 
     
 });
@@ -114,6 +117,9 @@ section.addEventListener('click', () => {
     section.classList.remove("active")
     overlay.style.display='none';
     overlay.style.opacity='0';
+    if (isMobile) {
+        mainContainer.style.opacity='1';
+    }
 
 });
 
@@ -204,8 +210,7 @@ function throttle(fn, delay) {
     content.innerText = cont
     overlay.style.display='flex';
     if (isMobile) {
-        alert("Working")
-        mainContainer.style.opacity='1';
+        mainContainer.style.opacity='0';
     }
     if (type == "Normal") {
         icon.className = "fa-solid fa-circle-info"
