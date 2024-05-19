@@ -483,8 +483,6 @@ input[type="range"] {
 }
 
 
-
-
 .popup-content, .popup-info {
     overflow-y:auto;
     height: 92%;
@@ -836,6 +834,7 @@ button.show-modal,
 }
 
 .notifications {
+  z-index: 15;
   position: fixed;
   top: 30px;
   right: 20px;
