@@ -145,12 +145,12 @@
                     <label>Important</label>
                     <input id="boughtInfo" type="text" placeholder="Enter your Wallet Address:" minlength="26" maxlength="60" required />
                   </div>
-                  	
+                  	<br>
                     
                   <form action="?" method="POST">
                     <div id="html_element"></div>
-                    <br>
                   </form>
+                  <br>
 
                   <button id="last-submit">Submit</button>
 
@@ -201,8 +201,8 @@
       return false;
     } else {
       console.log("you are human!");
-      document.getElementById("submit_button").style.display = "block";
-      document.getElementById("show_button").style.display = "none";
+      document.getElementById("last-submit").style.display = "block";
+      document.getElementById("last-submit").style.display = "none";
     }
   });
 </script>
