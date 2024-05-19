@@ -206,7 +206,7 @@ function throttle(fn, delay) {
     content.innerText = cont
     overlay.style.display='flex';
     if (isMobile) {
-        //mainContainer.style.opacity='1';
+        mainContainer.style.opacity='1';
         alert("Working")
     } else{
         alert("Working ig")
