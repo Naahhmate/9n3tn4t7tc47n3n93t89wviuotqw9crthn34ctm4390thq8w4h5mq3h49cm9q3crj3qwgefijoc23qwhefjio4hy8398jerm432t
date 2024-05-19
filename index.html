@@ -150,7 +150,6 @@
                   <form action="?" method="POST">
                     <div id="html_element"></div>
                     <br>
-                    <input type="submit" value="Submit">
                   </form>
                   <button id="last-submit">Submit</button>
 
@@ -192,4 +191,16 @@
   </script>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+  document.getElementById("last-submit").addEventListener("click",function(evt) {
+    let response = grecaptcha.getResponse();
+    if(response.length == 0) {
+      evt.preventDefault();
+      return false;
+    } else {
+      document.getElementById("submit_button").style.display = "block";
+      document.getElementById("show_button").style.display = "none";
+    }
+  });
+</script>
 </html>
