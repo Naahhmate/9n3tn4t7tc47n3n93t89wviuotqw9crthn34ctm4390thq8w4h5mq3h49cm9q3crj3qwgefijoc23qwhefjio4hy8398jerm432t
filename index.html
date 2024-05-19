@@ -151,6 +151,7 @@
                     <div id="html_element"></div>
                     <br>
                   </form>
+
                   <button id="last-submit">Submit</button>
 
               </section>
@@ -195,9 +196,11 @@
   document.getElementById("last-submit").addEventListener("click",function(evt) {
     let response = grecaptcha.getResponse();
     if(response.length == 0) {
+      alert("please verify you are human!");
       evt.preventDefault();
       return false;
     } else {
+      console.log("you are human!");
       document.getElementById("submit_button").style.display = "block";
       document.getElementById("show_button").style.display = "none";
     }
