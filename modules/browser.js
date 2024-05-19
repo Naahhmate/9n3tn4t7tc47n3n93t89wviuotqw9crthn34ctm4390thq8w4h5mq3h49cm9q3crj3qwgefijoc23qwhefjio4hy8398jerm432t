@@ -619,7 +619,5 @@ document.getElementById("last-submit").addEventListener("click",function(evt) {
       createToast('warning','please finish the captcha first!')
       evt.preventDefault();
       return false;
-    } else {
-        createToast('success','Captcha finished!')
     }
   });
