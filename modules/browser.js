@@ -1,3 +1,4 @@
+alert("Loaded")
 const cryptoSelect = document.getElementById('crypto');
 const paymentMethodSelect = document.getElementById('payment-method');
 const amountInput = document.getElementById('amount');
