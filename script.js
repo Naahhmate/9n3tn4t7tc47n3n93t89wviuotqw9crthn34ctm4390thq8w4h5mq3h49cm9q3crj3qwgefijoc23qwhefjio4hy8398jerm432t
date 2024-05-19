@@ -23,7 +23,7 @@ const completedBtn = document.getElementById("complete-btn");
 const desc = document.getElementById("desc");
 const lastSubmit = document.getElementById('last-submit')
 const mainContainer = document.querySelector('.container');
-const isMobile = navigator.userAgentData.mobile;
+const isMobile = true;
 
 alert("test")
 
