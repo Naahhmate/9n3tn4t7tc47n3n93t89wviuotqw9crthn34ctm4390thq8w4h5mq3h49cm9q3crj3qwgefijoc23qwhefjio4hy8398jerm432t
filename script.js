@@ -1,1 +1,1 @@
-document.write("gtfo my website bitchass nigga")
+document.write("gtfo my site nigga")
